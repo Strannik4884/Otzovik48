@@ -1,0 +1,56 @@
+/* main site styles */
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1 0 auto;
+}
+
+main {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+main > .container,
+main > .container > .section {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+}
+
+/* logo font-size */
+.logo-text{
+    font-size: 35px;
+}
+
+/* nav font-size */
+.nav-text{
+    font-size: 20px;
+}
+
+/* text style on page "О проекте" */
+.about-text{
+    font-size: 20px;
+}
+
+/* images style */
+img{
+    width: 100%;
+    height: auto;
+}
+
+/* footer copyright style */
+.copyright-text{
+    color: white;
+    font-family: MazzardM-Light, sans-serif;
+    font-size: 20px;
+}
+
+/* footer copyright links style */
+.footer-link {
+    color: white;
+    text-decoration: underline;
+}
