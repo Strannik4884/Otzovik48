@@ -35,11 +35,6 @@ class Product
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=1024, nullable=true)
-     */
-    private $photo;
-
-    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product")
      */
     private $comments;
@@ -90,18 +85,6 @@ class Product
         return $this;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Comment[]
      */
@@ -131,6 +114,11 @@ class Product
         }
 
         return $this;
+    }
+
+    public function getCommentsCount() : int
+    {
+        return $this->comments->count();
     }
 
     public function __toString()

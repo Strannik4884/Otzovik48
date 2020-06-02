@@ -106,6 +106,12 @@
             "./config/routes/easy_admin.yaml"
         ]
     },
+    "knplabs/knp-components": {
+        "version": "v2.3.5"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.2.0"
+    },
     "nikic/php-parser": {
         "version": "v4.4.0"
     },
