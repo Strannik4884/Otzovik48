@@ -6,13 +6,13 @@
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <title>{% block title %}Отзовик48{% endblock %}</title>
     {% block stylesheets %}
-    <!-- Fonts -->
-    <link href="{{ asset('fonts/Mazzard_M_Light/MazzardSoftM-Light.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- CSS -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialert.css') }}" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="{{ asset('fonts/Mazzard_M_Light/MazzardSoftM-Light.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- CSS -->
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/materialert.css') }}" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/main.css') }}"/>
     {% endblock %}
 </head>
 <body>
@@ -25,15 +25,19 @@
                 <a href="{{ path('app_home') }}" class="brand-logo"><span class="logo-text">Отзовик48</span></a>
                 <!-- Site menu -->
                 <ul class="right hide-on-med-and-down">
-                    {% if app.user %}
-                        <li><a class="nav-text" href="{{ path('app_profile') }}">Мой профиль</a></li>
-                    {% endif %}
                     {% if app.user is same as(null) %}
                         <li><a class="nav-text" href="{{ path('app_register') }}">Регистрация</a></li>
                         <li><a class="nav-text" href="{{ path('app_login') }}">Вход</a></li>
                     {% endif %}
                     {% if app.user %}
-                        <li><a class="nav-text" href="{{ path('app_logout') }}">Выход</a></li>
+                        <li><span class="nav-text">Добро пожаловать, </span></li>
+                        <li><a class="dropdown-trigger nav-text" href="#" data-target="navbar_dropdown">{{ app.user }}</a></li>
+                        <ul id="navbar_dropdown" class="dropdown-content">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a class="nav-text" href="/admin">Админ-панель</a></li>
+                        {% endif %}
+                            <li><a class="nav-text" href="{{ path('app_logout') }}">Выход</a></li>
+                        </ul>
                     {% endif %}
                 </ul>
                 <!-- Mobile hamburger menu icon -->
@@ -45,15 +49,21 @@
 <!-- Mobile hamburger menu -->
 <ul id="nav-mobile" class="sidenav">
     <li><a href="{{ path('app_home') }}">Главная</a></li>
-    <li><a href="{{ path('app_profile') }}">Мой профиль</a></li>
-    <li><a href="{{ path('app_register') }}">Регистрация</a></li>
-    <li><a href="{{ path('app_login') }}">Вход</a></li>
+    {% if app.user is same as(null) %}
+        <li><a href="{{ path('app_register') }}">Регистрация</a></li>
+        <li><a href="{{ path('app_login') }}">Вход</a></li>
+    {% endif %}
+    {% if app.user %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="/admin">Админ-панель</a></li>
+        {% endif %}
+        <li><a href="{{ path('app_logout') }}">Выход</a></li>
+    {% endif %}
 </ul>
 <!-- Site content -->
 <main>
     <div class="container">
         {% block content %}
-        <div class="row"></div>
             {{ include('product/_index.html.twig') }}
         {% endblock %}
     </div>

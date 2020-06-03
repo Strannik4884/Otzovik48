@@ -11,3 +11,9 @@ $('#message-close').click(function(){
   $( "#message-box" ).fadeOut( "slow", function() {
   });
 });
+
+// dropdown event handler
+$('.dropdown-trigger').dropdown({
+      coverTrigger: false
+    }
+  );
