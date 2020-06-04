@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,28 +20,25 @@ class DefaultController extends AbstractController
      */
     public function index(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request) : Response
     {
-//        $products = $productRepository->findAll();
-//        // order products by created date
-//        usort($products, function (Product $a, Product $b){
-//            if ($a->getDate() === $b->getDate()) {
-//                return 0;
-//            }
-//            return ($a->getDate() > $b->getDate()) ? -1 : 1;
-//        });
-
+        // get all Product objects
         $dql   = "SELECT p FROM App\Entity\Product p";
         $query = $em->createQuery($dql);
-
+        // set default sort and  direction properties
+        $request->query->set('sort', 'p.date');
+        $request->query->set('direction', 'desc');
+        // get page number
+        $page_number = $request->query->getInt('page', 1);
+        // set correct pager number
+        if($page_number < 1){
+            $page_number = 1;
+        }
+        // paginate
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1),
-            9,
-            [
-                'defaultSortFieldName' => 'p.date',
-                'defaultSortDirection' => 'desc'
-            ]
+            $query,
+            $page_number,
+            9
         );
-
+        // render view
         return $this->render('base.html.twig', [
             'controller_name' => 'DefaultController',
             'pagination' => $pagination,
