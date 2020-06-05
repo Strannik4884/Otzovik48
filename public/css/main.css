@@ -21,6 +21,7 @@ main > .container > .section {
     flex: 1;
 }
 
+/* start rating styles */
 form .stars {
     background: url("../images/stars.png") repeat-x 0 0;
     width: 150px;
@@ -93,6 +94,7 @@ form .stars span {
     transition: width 0.5s;
 }
 
+/* disable star rating on index page */
 #show_stars{
     pointer-events: none;
 }

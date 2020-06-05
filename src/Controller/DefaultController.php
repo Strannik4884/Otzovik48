@@ -24,7 +24,7 @@ class DefaultController extends AbstractController
         $dql   = "SELECT p FROM App\Entity\Product p";
         $query = $em->createQuery($dql);
         // set default sort and  direction properties
-        $request->query->set('sort', 'p.date');
+        $request->query->set('sort', 'p.created_date');
         $request->query->set('direction', 'desc');
         // get page number
         $page_number = $request->query->getInt('page', 1);

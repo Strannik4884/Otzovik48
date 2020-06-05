@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
@@ -25,9 +24,9 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $login;
+    private $email;
 
     /**
      * @var string The hashed password
@@ -41,19 +40,9 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="string", length=1024, nullable=true)
-     */
-    private $user_photo;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="by_user")
@@ -70,14 +59,14 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getLogin(): ?string
+    public function getEmail(): ?string
     {
-        return $this->login;
+        return $this->email;
     }
 
-    public function setLogin(string $login): self
+    public function setEmail(string $email): self
     {
-        $this->login = $login;
+        $this->email = $email;
 
         return $this;
     }
@@ -89,7 +78,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->login;
+        return (string) $this->email;
     }
 
     /**
@@ -140,18 +129,6 @@ class User implements UserInterface
     {
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -160,18 +137,6 @@ class User implements UserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUserPhoto(): ?string
-    {
-        return $this->user_photo;
-    }
-
-    public function setUserPhoto(?string $user_photo): self
-    {
-        $this->user_photo = $user_photo;
 
         return $this;
     }
@@ -209,6 +174,6 @@ class User implements UserInterface
 
     public function __toString()
     {
-        return strval($this->login);
+        return strval($this->email);
     }
 }

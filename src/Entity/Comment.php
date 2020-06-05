@@ -30,7 +30,7 @@ class Comment
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $created_date;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
@@ -73,14 +73,14 @@ class Comment
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getCreateDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->created_date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setCreateDate(\DateTimeInterface $createdDate): self
     {
-        $this->date = $date;
+        $this->created_date = $createdDate;
 
         return $this;
     }

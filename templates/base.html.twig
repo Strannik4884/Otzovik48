@@ -31,7 +31,7 @@
                     {% endif %}
                     {% if app.user %}
                         <li><span class="nav-text">Добро пожаловать, </span></li>
-                        <li><a class="dropdown-trigger nav-text" href="#" data-target="navbar_dropdown">{{ app.user }}</a></li>
+                        <li><a class="dropdown-trigger nav-text" href="#" data-target="navbar_dropdown">{{ app.user.name }}</a></li>
                         <ul id="navbar_dropdown" class="dropdown-content">
                         {% if is_granted('ROLE_ADMIN') %}
                             <li><a class="nav-text" href="/admin">Админ-панель</a></li>

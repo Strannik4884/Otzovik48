@@ -20,7 +20,7 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
 
@@ -32,7 +32,7 @@ class Product
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $created_date;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product")
@@ -73,14 +73,14 @@ class Product
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getCreatedDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->created_date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setCreatedDate(\DateTimeInterface $created_date): self
     {
-        $this->date = $date;
+        $this->created_date = $created_date;
 
         return $this;
     }
