@@ -11,15 +11,15 @@
                     <div class="card-content center-align">
                         <form id="product{{ product.id }}_rating">
                             <div id="show_stars" class="stars">
-                                <input  type="radio" name="star" class="star-1" id="star-1" disabled/>
+                                <input  type="radio" name="star" class="star-1" id="star-1" {% if product.getRating is same as(1) %}checked{% else %}disabled{% endif %}/>
                                 <label class="star-1" for="star-1">1</label>
-                                <input type="radio" name="star" class="star-2" id="star-2" disabled/>
+                                <input type="radio" name="star" class="star-2" id="star-2" {% if product.getRating is same as(2) %}checked{% else %}disabled{% endif %}/>
                                 <label class="star-2" for="star-2">2</label>
-                                <input type="radio" name="star" class="star-3" id="star-3" disabled/>
+                                <input type="radio" name="star" class="star-3" id="star-3" {% if product.getRating is same as(3) %}checked{% else %}disabled{% endif %}/>
                                 <label class="star-3" for="star-3">3</label>
-                                <input type="radio" name="star" class="star-4" id="star-4" checked/>
+                                <input type="radio" name="star" class="star-4" id="star-4" {% if product.getRating is same as(4) %}checked{% else %}disabled{% endif %}/>
                                 <label class="star-4" for="star-4">4</label>
-                                <input type="radio" name="star" class="star-5" id="star-5" disabled/>
+                                <input type="radio" name="star" class="star-5" id="star-5" {% if product.getRating is same as(5) %}checked{% else %}disabled{% endif %}/>
                                 <label class="star-5" for="star-5">5</label>
                                 <span></span>
                             </div>

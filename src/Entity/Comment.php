@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +26,11 @@ class Comment
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "Rating must be between {{ min }} and {{ max }}",
+     * )
      */
     private $rating;
 
@@ -43,6 +50,11 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $for_product;
+
+    public function __construct()
+    {
+        $this->created_date = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -73,12 +85,12 @@ class Comment
         return $this;
     }
 
-    public function getCreateDate(): ?\DateTimeInterface
+    public function getCreatedDate(): ?\DateTimeInterface
     {
         return $this->created_date;
     }
 
-    public function setCreateDate(\DateTimeInterface $createdDate): self
+    public function setCreatedDate(\DateTimeInterface $createdDate): self
     {
         $this->created_date = $createdDate;
 

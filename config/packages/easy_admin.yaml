@@ -1,5 +1,22 @@
 easy_admin:
+    site_name: '<a href="/">Отзовик48</a>'
+    user:
+        display_avatar: false
+        name_property_path: 'name'
     entities:
-        - App\Entity\Product
-        - App\Entity\Comment
-        - App\Entity\User
+        Product:
+          class: App\Entity\Product
+          form:
+            fields:
+              - name
+              - description
+        Comment:
+          class: App\Entity\Comment
+          form:
+            fields:
+              - text
+              - rating
+              - by_user
+              - for_product
+        User:
+          class: App\Entity\User

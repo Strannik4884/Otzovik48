@@ -41,6 +41,7 @@ class Product
 
     public function __construct()
     {
+        $this->created_date = new \DateTime();
         $this->comments = new ArrayCollection();
     }
 
@@ -85,6 +86,11 @@ class Product
         return $this;
     }
 
+    public function setCreatedDateValue()
+    {
+        $this->created_date = new \DateTime();
+    }
+
     /**
      * @return Collection|Comment[]
      */
@@ -119,6 +125,18 @@ class Product
     public function getCommentsCount() : int
     {
         return $this->comments->count();
+    }
+
+    public function getRating() :int
+    {
+        $count = 0;
+        foreach ($this->comments as $comment){
+            $count += $comment->getRating();
+        }
+        if($this->getCommentsCount() == 0){
+            return 0;
+        }
+        return (int) $count / $this->getCommentsCount();
     }
 
     public function __toString()
