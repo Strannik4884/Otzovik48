@@ -6,9 +6,11 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @Vich\Uploadable()
  */
 class Product
 {
@@ -33,6 +35,33 @@ class Product
      * @ORM\Column(type="datetime")
      */
     private $created_date;
+
+    /**
+     * @ORM\Column(type="string", length=512)
+     */
+    private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="products_thumbnails", fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
+    /**
+     * @return mixed
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * @param mixed $thumbnailFile
+     * @throws \Exception
+     */
+    public function setThumbnailFile($thumbnailFile): void
+    {
+        $this->thumbnailFile = $thumbnailFile;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product")
@@ -142,5 +171,17 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
     }
 }
