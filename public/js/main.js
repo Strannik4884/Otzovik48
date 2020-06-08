@@ -14,6 +14,7 @@ $('#message-close').click(function(){
 
 // dropdown event handler
 $('.dropdown-trigger').dropdown({
-      coverTrigger: false
+    coverTrigger: false,
+    constrainWidth: false
     }
   );
