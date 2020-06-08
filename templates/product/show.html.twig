@@ -6,7 +6,7 @@
     <div class="row"></div>
     <div class="row">
         <div class="col s12">
-            <h5>{{ product.name }}</h5>
+            <h4>{{ product.name }}</h4>
         </div>
     </div>
     <table class="table">
@@ -32,7 +32,7 @@
                 <td>
                     <div class="row">
                         <div class="col s12 left-align" style="width: 200px; margin-left: -30px">
-                            <form>
+                            <form id="product_rating">
                                 <div id="show_stars" class="stars">
                                     <input  type="radio" name="star" class="star-1" id="star-1" {% if product.getRating is same as(1) %}checked{% else %}disabled{% endif %}/>
                                     <label class="star-1" for="star-1">1</label>
@@ -55,4 +55,5 @@
     </table>
     <div class="row"></div>
     <a href="{{ app.request.headers.get('referer') }}" class="btn waves-effect waves-light" style="float: left; width: 120px"><i class="material-icons left">arrow_back</i>Назад</a>
+    {{ include('comment/_index.html.twig') }}
 {% endblock %}

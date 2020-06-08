@@ -1,0 +1,36 @@
+<h5>Отзывы</h5>
+<table class="table">
+    <tbody>
+    {% for comment in pagination %}
+        <tr>
+            <td colspan="3">{{ comment.byUser.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ comment.text }}</td>
+            <td>
+                <form id="product_rating">
+                    <div id="show_stars" class="stars">
+                        <input  type="radio" name="star" class="star-1" id="star-1" {% if comment.getRating is same as(1) %}checked{% else %}disabled{% endif %}/>
+                        <label class="star-1" for="star-1">1</label>
+                        <input type="radio" name="star" class="star-2" id="star-2" {% if comment.getRating is same as(2) %}checked{% else %}disabled{% endif %}/>
+                        <label class="star-2" for="star-2">2</label>
+                        <input type="radio" name="star" class="star-3" id="star-3" {% if comment.getRating is same as(3) %}checked{% else %}disabled{% endif %}/>
+                        <label class="star-3" for="star-3">3</label>
+                        <input type="radio" name="star" class="star-4" id="star-4" {% if comment.getRating is same as(4) %}checked{% else %}disabled{% endif %}/>
+                        <label class="star-4" for="star-4">4</label>
+                        <input type="radio" name="star" class="star-5" id="star-5" {% if comment.getRating is same as(5) %}checked{% else %}disabled{% endif %}/>
+                        <label class="star-5" for="star-5">5</label>
+                        <span></span>
+                    </div>
+                </form>
+            </td>
+            <td>{{ comment.createdDate ? comment.createdDate|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col s12 center-align">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
