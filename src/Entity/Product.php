@@ -100,13 +100,6 @@ class Product
         return $this->created_date;
     }
 
-    public function setCreatedDate(\DateTimeInterface $created_date): self
-    {
-        $this->created_date = $created_date;
-
-        return $this;
-    }
-
     public function setCreatedDateValue()
     {
         $this->created_date = new \DateTime();
@@ -143,7 +136,7 @@ class Product
         return $this;
     }
 
-    public function getCommentsCount() : int
+    public function getCommentsCount(): int
     {
         return $this->comments->count();
     }
@@ -183,6 +176,11 @@ class Product
         $this->thumbnailName = $thumbnailName;
 
         return $this;
+    }
+
+    public function getThumbnailFileFullPath(): string
+    {
+        return '/uploads/' . $this->getThumbnailName();
     }
 
     public function __toString()

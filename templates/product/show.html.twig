@@ -3,31 +3,56 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+    <div class="row"></div>
+    <div class="row">
+        <div class="col s12">
+            <h5>{{ product.name }}</h5>
+        </div>
+    </div>
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
+                <th>Описание</th>
                 <td>{{ product.description }}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th>Дата добавления</th>
                 <td>{{ product.createdDate ? product.createdDate|date('d-m-Y H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Photo</th>
-                <td><img class="responsive-img" src="{{ asset('images/product_default.jpg') }}"></td>
+                <th>Фото</th>
+                <td><img class="responsive-img" src="{{ product.getThumbnailFileFullPath }}"></td>
+            </tr>
+            <tr>
+                <th>Количество оценок</th>
+                <td>{{ product.getCommentsCount() }}</td>
+            </tr>
+            <tr>
+                <th>Рейтинг</th>
+                <td>
+                    <div class="row">
+                        <div class="col s12 left-align" style="width: 200px; margin-left: -30px">
+                            <form>
+                                <div id="show_stars" class="stars">
+                                    <input  type="radio" name="star" class="star-1" id="star-1" {% if product.getRating is same as(1) %}checked{% else %}disabled{% endif %}/>
+                                    <label class="star-1" for="star-1">1</label>
+                                    <input type="radio" name="star" class="star-2" id="star-2" {% if product.getRating is same as(2) %}checked{% else %}disabled{% endif %}/>
+                                    <label class="star-2" for="star-2">2</label>
+                                    <input type="radio" name="star" class="star-3" id="star-3" {% if product.getRating is same as(3) %}checked{% else %}disabled{% endif %}/>
+                                    <label class="star-3" for="star-3">3</label>
+                                    <input type="radio" name="star" class="star-4" id="star-4" {% if product.getRating is same as(4) %}checked{% else %}disabled{% endif %}/>
+                                    <label class="star-4" for="star-4">4</label>
+                                    <input type="radio" name="star" class="star-5" id="star-5" {% if product.getRating is same as(5) %}checked{% else %}disabled{% endif %}/>
+                                    <label class="star-5" for="star-5">5</label>
+                                    <span></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ app.request.headers.get('referer') }}">back to list</a>
-
+    <div class="row"></div>
+    <a href="{{ app.request.headers.get('referer') }}" class="btn waves-effect waves-light" style="float: left; width: 120px"><i class="material-icons left">arrow_back</i>Назад</a>
 {% endblock %}
