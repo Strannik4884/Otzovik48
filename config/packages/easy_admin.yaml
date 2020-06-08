@@ -12,7 +12,7 @@ easy_admin:
               - description
               - { property: 'thumbnailFile', type: 'vich_image' }
           list:
-            fields: ['name', 'description', 'created_date', 'comments', {property: 'thumbnail', type: 'image', base_path: '%uploads_path%'}]
+            fields: ['name', 'description', 'created_date', 'comments', {property: 'thumbnailName', type: 'image', base_path: '%uploads_path%'}]
         Comment:
           class: App\Entity\Comment
           form:

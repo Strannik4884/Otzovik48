@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -39,29 +40,20 @@ class Product
     /**
      * @ORM\Column(type="string", length=512)
      */
-    private $thumbnail;
+    private $thumbnailName;
 
     /**
-     * @Vich\UploadableField(mapping="products_thumbnails", fileNameProperty="thumbnail")
+     * @Assert\File(
+     *     maxSize = "10M",
+     *     mimeTypes = {
+     *         "image/jpeg",
+     *         "image/gif",
+     *         "image/png",
+     *     }
+     * )
+     * @Vich\UploadableField(mapping="products_thumbnails", fileNameProperty="thumbnailName")
      */
     private $thumbnailFile;
-
-    /**
-     * @return mixed
-     */
-    public function getThumbnailFile()
-    {
-        return $this->thumbnailFile;
-    }
-
-    /**
-     * @param mixed $thumbnailFile
-     * @throws \Exception
-     */
-    public function setThumbnailFile($thumbnailFile): void
-    {
-        $this->thumbnailFile = $thumbnailFile;
-    }
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product")
@@ -156,7 +148,7 @@ class Product
         return $this->comments->count();
     }
 
-    public function getRating() :int
+    public function getRating() : int
     {
         $count = 0;
         foreach ($this->comments as $comment){
@@ -168,20 +160,33 @@ class Product
         return (int) $count / $this->getCommentsCount();
     }
 
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * @param $thumbnailFile
+     */
+    public function setThumbnailFile($thumbnailFile): void
+    {
+        $this->thumbnailFile = $thumbnailFile;
+    }
+
+    public function getThumbnailName(): ?string
+    {
+        return $this->thumbnailName;
+    }
+
+    public function setThumbnailName(?string $thumbnailName): self
+    {
+        $this->thumbnailName = $thumbnailName;
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->name;
-    }
-
-    public function getThumbnail(): ?string
-    {
-        return $this->thumbnail;
-    }
-
-    public function setThumbnail(?string $thumbnail): self
-    {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
     }
 }
