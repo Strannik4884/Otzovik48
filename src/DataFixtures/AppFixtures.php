@@ -20,14 +20,12 @@ class AppFixtures extends Fixture
     {
         // create user
         $user = new User();
-        $user->setLogin('test');
         $user->setPassword($this->passwordEncoder->encodePassword($user,'Test123!'));
         $user->setRoles(array('ROLE_USER'));
         $user->setEmail('test@test.ru');
         $user->setName('Тестов Тест Тестович');
         // create admin
         $admin = new User();
-        $admin->setLogin('admin');
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'Odmin123!'));
         $admin->setRoles(array('ROLE_ADMIN'));
         $admin->setEmail('admin@test.ru');
