@@ -55,5 +55,8 @@
     </table>
     <div class="row"></div>
     <a href="{{ app.request.headers.get('referer') }}" class="btn waves-effect waves-light" style="float: left; width: 120px"><i class="material-icons left">arrow_back</i>Назад</a>
+    <div class="row"></div>
+    {{ include('comment/_form.html.twig') }}
+    <div class="row"></div>
     {{ include('comment/_index.html.twig') }}
 {% endblock %}

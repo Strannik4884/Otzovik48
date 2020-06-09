@@ -16,45 +16,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/", name="comment_index", methods={"GET"})
+     * @Route("/new", name="comment_new", methods={"GET","POST"})
      */
-    public function index(CommentRepository $commentRepository): Response
+    public function new(Request $request): Response
     {
-        return $this->render('comment/_index.html.twig', [
-            'comments' => $commentRepository->findAll(),
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('comment_index');
+        }
+
+        return $this->render('comment/_new.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
         ]);
     }
 
-//    /**
-//     * @Route("/new", name="comment_new", methods={"GET","POST"})
-//     */
-//    public function new(Request $request): Response
-//    {
-//        $comment = new Comment();
-//        $form = $this->createForm(CommentType::class, $comment);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->persist($comment);
-//            $entityManager->flush();
-//
-//            return $this->redirectToRoute('comment_index');
-//        }
-//
-//        return $this->render('comment/_new.html.twig', [
-//            'comment' => $comment,
-//            'form' => $form->createView(),
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/{id}", name="comment_show", methods={"GET"})
-//     */
-//    public function show(Comment $comment): Response
-//    {
-//        return $this->render('comment/show.html.twig', [
-//            'comment' => $comment,
-//        ]);
-//    }
+    /**
+     * @Route("/{id}", name="comment_show", methods={"GET"})
+     */
+    public function show(Comment $comment): Response
+    {
+        return $this->render('comment/show.html.twig', [
+            'comment' => $comment,
+        ]);
+    }
 }

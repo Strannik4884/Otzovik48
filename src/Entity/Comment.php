@@ -29,7 +29,7 @@ class Comment
      * @Assert\Range(
      *      min = 1,
      *      max = 5,
-     *      notInRangeMessage = "Rating must be between {{ min }} and {{ max }}",
+     *      notInRangeMessage = "Рейтинг должен быть от {{ min }} и до {{ max }}!",
      * )
      */
     private $rating;

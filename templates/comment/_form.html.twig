@@ -1,4 +1,31 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<h5>Оставить отзыв</h5>
+{{ form_start(form, {'attr':{'class':'col s12', 'accept-charset':'utf-8'}}) }}
+    {% set formErrors = form.vars.errors.form.getErrors(true) %}
+    {% if formErrors|length %}
+        <div class="alert alert-danger">
+            {% for error in formErrors %}
+                <div class="materialert error">
+                    <div class="material-icons">error_outline</div>
+                    {{ error.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="input-field col s12">
+            {{ form_widget(form.text) }}
+            {{ form_label(form.text) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            {{ form_widget(form.rating) }}
+            {{ form_label(form.rating) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <button class="btn waves-effect waves-light" style="float: left;" type="submit">Оставить отзыв<i class="material-icons right">send</i></button>
+        </div>
+    </div>
 {{ form_end(form) }}
