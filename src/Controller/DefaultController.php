@@ -30,7 +30,7 @@ class DefaultController extends AbstractController
         // get page number
         $page_number = $request->query->getInt('page', 1);
         // set correct pager number
-        if($page_number < 1){
+        if ($page_number < 1) {
             $page_number = 1;
         }
         // paginate

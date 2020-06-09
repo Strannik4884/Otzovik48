@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
     {
         // create user
         $user = new User();
-        $user->setPassword($this->passwordEncoder->encodePassword($user,'Test123!'));
+        $user->setPassword($this->passwordEncoder->encodePassword($user, 'Test123!'));
         $user->setRoles(array('ROLE_USER'));
         $user->setEmail('test@test.ru');
         $user->setName('Тестов Тест Тестович');

@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         // deny logged user access
-        if($this->getUser() !== null){
+        if ($this->getUser() !== null) {
             return new RedirectResponse($this->generateUrl('app_home'));
         }
         $user = new User();

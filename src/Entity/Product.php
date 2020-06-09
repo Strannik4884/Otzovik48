@@ -144,10 +144,10 @@ class Product
     public function getRating() : int
     {
         $count = 0;
-        foreach ($this->comments as $comment){
+        foreach ($this->comments as $comment) {
             $count += $comment->getRating();
         }
-        if($this->getCommentsCount() == 0){
+        if ($this->getCommentsCount() == 0) {
             return 0;
         }
         return (int) $count / $this->getCommentsCount();
