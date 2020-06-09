@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         $admin->setLogin('admin');
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'Odmin123!'));
         $admin->setRoles(array('ROLE_ADMIN'));
-        $admin->setEmail('admin@lstu-app.ru');
+        $admin->setEmail('admin@test.ru');
         $admin->setName('Admin');
         // insert users to database
         $manager->persist($user);

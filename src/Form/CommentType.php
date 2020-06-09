@@ -22,7 +22,7 @@ class CommentType extends AbstractType
                         'max' => 512
                     ])
                 ],
-                'label' => 'Имя',
+                'label' => 'Отзыв',
                 'attr' => [
                     'class' => 'validate'
                 ]
