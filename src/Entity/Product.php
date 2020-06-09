@@ -56,7 +56,7 @@ class Product
     private $thumbnailFile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="for_product", cascade={"remove"})
      */
     private $comments;
 

@@ -40,8 +40,8 @@ class Comment
     private $created_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments", cascade={"remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $by_user;
 

@@ -45,7 +45,7 @@ class User implements UserInterface
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="by_user")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="by_user", cascade={"remove"})
      */
     private $comments;
 
